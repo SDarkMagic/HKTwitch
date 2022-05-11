@@ -37,6 +37,25 @@ namespace HollowTwitch.Commands
             enemy.SetActive(true);
         }
 
+        [HKCommand("spawnNKG")]
+        [Summary("Spawns the Nightmare King")]
+        [Cooldown(60, 3)]
+        public IEnumerator SpawnNKG()
+        {
+            string name = "Nightmare Grimm Boss";
+
+            Logger.Log($"Trying to spawn NKG");
+
+            if (!ObjectLoader.InstantiableObjects.TryGetValue(name, out GameObject go))
+                yield break;
+
+            GameObject enemy = Object.Instantiate(go, HeroController.instance.gameObject.transform.position + new Vector3(0, 2.6f), Quaternion.identity);
+
+            yield return new WaitForSecondsRealtime(1);
+
+            enemy.SetActive(true);
+        }
+
         [HKCommand("jars")]
         [Summary("Summons 5 collector jars from the ceiling.")]
         [Cooldown(60)]
